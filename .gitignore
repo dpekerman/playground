@@ -1,0 +1,20 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.log
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+*.js.map
+
+# IDE
+.idea/
+.vscode/
+
+# Sensitive
+appsettings.*.local.json
