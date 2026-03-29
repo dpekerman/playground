@@ -1,65 +1,25 @@
-.app-toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+// Nav link styles — kept in SCSS because:
+// 1. mat-button internals need !important to override Material defaults
+// 2. .active-link is applied dynamically by Angular's routerLinkActive
+.nav-link {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.85) !important;
 
-  .toolbar-logo {
-    margin-right: 8px;
-    font-size: 28px;
-    height: 28px;
-    width: 28px;
+  mat-icon {
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
   }
 
-  .toolbar-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-right: 24px;
+  &.active-link {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: white !important;
   }
 
-  .toolbar-spacer {
-    flex: 1;
+  &:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
   }
-
-  .nav-links {
-    display: flex;
-    gap: 4px;
-
-    a {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: rgba(255, 255, 255, 0.85);
-      border-radius: 4px;
-
-      mat-icon {
-        font-size: 20px;
-        height: 20px;
-        width: 20px;
-      }
-
-      &.active-link {
-        background: rgba(255, 255, 255, 0.18);
-        color: white;
-      }
-
-      &:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-      }
-    }
-  }
-}
-
-.app-content {
-  min-height: calc(100vh - 64px - 48px);
-}
-
-.app-footer {
-  text-align: center;
-  padding: 12px;
-  color: #999;
-  font-size: 0.8rem;
-  border-top: 1px solid #eee;
 }

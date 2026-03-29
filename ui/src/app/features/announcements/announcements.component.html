@@ -1,6 +1,6 @@
-<div class="page-container">
-  <div class="page-header">
-    <h1 class="page-title">
+<div class="max-w-4xl mx-auto px-6 py-8">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="flex items-center gap-2 text-3xl font-semibold text-blue-700 m-0">
       <mat-icon>campaign</mat-icon>
       Announcements
     </h1>
@@ -11,14 +11,16 @@
   </div>
 
   @if (loading()) {
-    <div class="loading-overlay">
+    <div class="flex flex-col items-center justify-center py-20 gap-4">
       <mat-progress-spinner mode="indeterminate" diameter="56" />
-      <p class="loading-text">Loading announcements...</p>
+      <p class="text-gray-500 m-0">Loading announcements...</p>
     </div>
   }
 
   @if (!loading() && error()) {
-    <div class="error-banner">
+    <div
+      class="flex items-center gap-3 bg-orange-50 border-l-4 border-orange-400 px-4 py-3 rounded mb-6 text-orange-800"
+    >
       <mat-icon>error_outline</mat-icon>
       <span>{{ error() }}</span>
       <button mat-button (click)="refresh()">Retry</button>
@@ -27,25 +29,31 @@
 
   @if (!loading() && !error()) {
     @if (announcements().length === 0) {
-      <p class="empty-state">No announcements yet. Click "New Announcement" to publish one.</p>
+      <p class="text-gray-400 italic my-4">
+        No announcements yet. Click "New Announcement" to publish one.
+      </p>
     }
-    <div class="announcements-list">
+    <div class="flex flex-col gap-3">
       @for (ann of announcements(); track ann.id) {
-        <mat-card class="announcement-card ann-{{ ann.type }}">
-          <mat-card-content>
-            <div class="ann-header">
-              <mat-icon class="ann-icon">{{ getAnnouncementIcon(ann.type) }}</mat-icon>
-              <div class="ann-body">
-                <strong>{{ ann.title }}</strong>
-                <p>{{ ann.content }}</p>
+        <mat-card class="ann-{{ ann.type }} transition-shadow duration-200 hover:shadow-md">
+          <mat-card-content class="py-3">
+            <div class="flex items-start gap-3">
+              <mat-icon class="ann-icon-{{ ann.type }} mt-0.5 flex-shrink-0">{{
+                getAnnouncementIcon(ann.type)
+              }}</mat-icon>
+              <div class="flex-1 min-w-0">
+                <strong class="block text-base">{{ ann.title }}</strong>
+                <p class="m-0 mt-1 text-gray-600 text-sm">{{ ann.content }}</p>
               </div>
-              <div class="ann-meta">
-                <span class="ann-date">{{ ann.publishedAt | date: 'mediumDate' }}</span>
+              <div class="flex flex-col items-end gap-1 flex-shrink-0">
+                <span class="text-xs text-gray-400">{{
+                  ann.publishedAt | date: 'mediumDate'
+                }}</span>
                 @if (!ann.isActive) {
-                  <mat-chip class="chip-inactive">Inactive</mat-chip>
+                  <mat-chip class="text-xs">Inactive</mat-chip>
                 }
               </div>
-              <div class="card-actions">
+              <div class="flex items-center gap-1 ml-1">
                 <button mat-icon-button [matTooltip]="'Edit'" (click)="openAnnouncementDialog(ann)">
                   <mat-icon>edit</mat-icon>
                 </button>

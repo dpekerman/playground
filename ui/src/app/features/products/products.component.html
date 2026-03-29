@@ -1,6 +1,6 @@
-<div class="page-container">
-  <div class="page-header">
-    <h1 class="page-title">
+<div class="max-w-7xl mx-auto px-6 py-8">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="flex items-center gap-2 text-3xl font-semibold text-blue-700 m-0">
       <mat-icon>storefront</mat-icon>
       Products
     </h1>
@@ -11,14 +11,16 @@
   </div>
 
   @if (loading()) {
-    <div class="loading-overlay">
+    <div class="flex flex-col items-center justify-center py-20 gap-4">
       <mat-progress-spinner mode="indeterminate" diameter="56" />
-      <p class="loading-text">Loading products...</p>
+      <p class="text-gray-500 m-0">Loading products...</p>
     </div>
   }
 
   @if (!loading() && error()) {
-    <div class="error-banner">
+    <div
+      class="flex items-center gap-3 bg-orange-50 border-l-4 border-orange-400 px-4 py-3 rounded mb-6 text-orange-800"
+    >
       <mat-icon>error_outline</mat-icon>
       <span>{{ error() }}</span>
       <button mat-button (click)="refresh()">Retry</button>
@@ -27,37 +29,45 @@
 
   @if (!loading() && !error()) {
     @if (products().length === 0) {
-      <p class="empty-state">No products yet. Click "Add Product" to create the first one.</p>
+      <p class="text-gray-400 italic my-4">
+        No products yet. Click "Add Product" to create the first one.
+      </p>
     }
-    <div class="products-grid">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
       @for (product of products(); track product.id) {
-        <mat-card class="product-card" [class.inactive]="!product.isActive">
+        <mat-card
+          class="flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
+          [class.inactive]="!product.isActive"
+        >
           @if (product.imageUrl) {
-            <img mat-card-image [src]="product.imageUrl" [alt]="product.name" />
+            <img
+              mat-card-image
+              [src]="product.imageUrl"
+              [alt]="product.name"
+              class="h-44 object-cover"
+            />
           }
           <mat-card-header>
             <mat-card-title>{{ product.name }}</mat-card-title>
             <mat-card-subtitle>
-              <mat-chip [class]="'chip-' + product.category.toLowerCase().replace('/', '-')">
-                {{ product.category }}
-              </mat-chip>
+              <mat-chip>{{ product.category }}</mat-chip>
             </mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content>
-            <p class="product-description">{{ product.description }}</p>
-            <div class="product-footer">
-              <span class="product-price">{{ product.price | currency }}</span>
+          <mat-card-content class="flex-1">
+            <p class="text-gray-500 text-sm leading-relaxed my-2">{{ product.description }}</p>
+            <div class="flex items-center justify-between mt-3">
+              <span class="text-xl font-bold text-blue-800">{{ product.price | currency }}</span>
               @if (!product.isActive) {
-                <mat-chip class="chip-inactive">Discontinued</mat-chip>
+                <mat-chip>Discontinued</mat-chip>
               }
             </div>
           </mat-card-content>
-          <mat-card-actions>
+          <mat-card-actions class="flex items-center">
             <button mat-button color="primary">Learn More</button>
             <button mat-flat-button color="primary" [disabled]="!product.isActive">
               Get Started
             </button>
-            <span class="action-spacer"></span>
+            <span class="flex-1"></span>
             <button
               mat-icon-button
               [matTooltip]="'Edit product'"

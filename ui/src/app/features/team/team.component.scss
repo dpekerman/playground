@@ -1,7 +1,14 @@
-.page-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 32px 24px;
+// Inactive card state
+.inactive {
+  @apply opacity-60 grayscale;
+}
+
+// Avatar placeholder icon — mat-icon needs explicit sizing overrides
+.avatar-placeholder-icon {
+  font-size: 80px !important;
+  height: 80px !important;
+  width: 80px !important;
+  @apply text-gray-300;
 }
 
 .page-header {

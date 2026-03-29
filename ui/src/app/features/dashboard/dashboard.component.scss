@@ -1,7 +1,22 @@
-.page-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 32px 24px;
+// Stat icon sizing — mat-icon ignores font-size from Tailwind without !important
+.stat-icon {
+  font-size: 40px !important;
+  height: 40px !important;
+  width: 40px !important;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+// Announcement type border colors — class is bound dynamically as ann-{{ ann.type }}
+// Full class names used here so Tailwind's content scanner picks them up via @apply
+.ann-success {
+  @apply border-l-4 border-green-500;
+}
+.ann-warning {
+  @apply border-l-4 border-amber-500;
+}
+.ann-info {
+  @apply border-l-4 border-blue-400;
 }
 
 .loading-overlay {

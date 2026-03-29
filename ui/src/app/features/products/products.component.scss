@@ -1,7 +1,7 @@
-.page-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 32px 24px;
+// mat-card hover and inactive states — kept in SCSS because
+// Angular's [class.inactive] binding uses a single class name.
+.inactive {
+  @apply opacity-60 grayscale;
 }
 
 .page-header {
