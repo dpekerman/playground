@@ -1,0 +1,17 @@
+/**
+ * Tailwind CSS v4 entry point.
+ * Kept as a plain .css file to ensure PostCSS processes it directly,
+ * avoiding any Sass → PostCSS ordering conflicts.
+ *
+ * Angular Material styles are NOT in a CSS cascade layer, so they
+ * naturally take precedence over Tailwind's @layer base (preflight).
+ * No need to disable preflight explicitly.
+ */
+@import 'tailwindcss';
+
+/**
+ * Explicitly tell Tailwind v4 to scan Angular component templates and
+ * TypeScript files for utility class usage (auto-detection starts from
+ * this CSS file and wouldn't otherwise reach the Angular templates).
+ */
+@source "./app";
