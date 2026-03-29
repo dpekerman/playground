@@ -1,0 +1,31 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <mat-icon class="toolbar-logo">rocket_launch</mat-icon>
+  <span class="toolbar-title">Playground</span>
+  <span class="toolbar-spacer"></span>
+  <nav class="nav-links">
+    <a mat-button routerLink="/dashboard" routerLinkActive="active-link">
+      <mat-icon>dashboard</mat-icon>
+      Dashboard
+    </a>
+    <a mat-button routerLink="/products" routerLinkActive="active-link">
+      <mat-icon>storefront</mat-icon>
+      Products
+    </a>
+    <a mat-button routerLink="/team" routerLinkActive="active-link">
+      <mat-icon>groups</mat-icon>
+      Team
+    </a>
+    <a mat-button routerLink="/announcements" routerLinkActive="active-link">
+      <mat-icon>campaign</mat-icon>
+      Announcements
+    </a>
+  </nav>
+</mat-toolbar>
+
+<main class="app-content">
+  <router-outlet />
+</main>
+
+<footer class="app-footer">
+  <p>© 2026 Playground Platform — Angular + .NET 9 + SQL Server</p>
+</footer>
