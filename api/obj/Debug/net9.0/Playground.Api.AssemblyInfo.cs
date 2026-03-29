@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Playground.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf86552a7d6a6668f019b578f79e368aa968ae48")]
 [assembly: System.Reflection.AssemblyProductAttribute("Playground.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Playground.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
