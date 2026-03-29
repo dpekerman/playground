@@ -121,36 +121,73 @@
 .announcements-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .announcement-card {
   border-left: 4px solid #2196f3;
+  transition: box-shadow 0.2s;
 
-  &.ann-success { border-left-color: #4caf50; }
-  &.ann-warning { border-left-color: #ff9800; }
-  &.ann-info    { border-left-color: #2196f3; }
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  &.ann-success {
+    border-left-color: #4caf50;
+  }
+  &.ann-warning {
+    border-left-color: #ff9800;
+  }
+  &.ann-info {
+    border-left-color: #2196f3;
+  }
 }
 
 .ann-header {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
+
+  .ann-icon {
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
 
   .ann-body {
     flex: 1;
-    p { margin: 4px 0 0; color: #555; }
+    p {
+      margin: 4px 0 0;
+      color: #555;
+      line-height: 1.5;
+    }
   }
 
   .ann-date {
     font-size: 0.8rem;
     color: #999;
+    white-space: nowrap;
     flex-shrink: 0;
   }
+}
+
+.ann-success .ann-icon {
+  color: #4caf50;
+}
+.ann-warning .ann-icon {
+  color: #ff9800;
+}
+.ann-info .ann-icon {
+  color: #2196f3;
 }
 
 .quick-nav {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }

@@ -1,0 +1,73 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">
+      <mat-icon>groups</mat-icon>
+      Team Members
+    </h1>
+    <button mat-flat-button color="primary" (click)="openTeamMemberDialog()">
+      <mat-icon>person_add</mat-icon>
+      Add Member
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-overlay">
+      <mat-progress-spinner mode="indeterminate" diameter="56" />
+      <p class="loading-text">Loading team...</p>
+    </div>
+  }
+
+  @if (!loading() && error()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ error() }}</span>
+      <button mat-button (click)="refresh()">Retry</button>
+    </div>
+  }
+
+  @if (!loading() && !error()) {
+    @if (teamMembers().length === 0) {
+      <p class="empty-state">No team members yet. Click "Add Member" to add the first one.</p>
+    }
+    <div class="team-grid">
+      @for (member of teamMembers(); track member.id) {
+        <mat-card class="team-card" [class.inactive]="!member.isActive">
+          <mat-card-content>
+            <div class="team-avatar">
+              @if (member.avatarUrl) {
+                <img [src]="member.avatarUrl" [alt]="member.name" class="avatar-img" />
+              } @else {
+                <mat-icon class="avatar-placeholder">account_circle</mat-icon>
+              }
+            </div>
+            <h3 class="member-name">{{ member.name }}</h3>
+            <p class="member-role">{{ member.role }}</p>
+            <mat-chip class="chip-department">{{ member.department }}</mat-chip>
+            <p class="member-email">
+              <mat-icon class="email-icon">email</mat-icon>
+              {{ member.email }}
+            </p>
+            <p class="member-joined">Joined {{ member.joinedAt | date: 'MMMM yyyy' }}</p>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button
+              mat-icon-button
+              [matTooltip]="'Edit member'"
+              (click)="openTeamMemberDialog(member)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              [matTooltip]="'Remove member'"
+              (click)="confirmDeleteTeamMember(member)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

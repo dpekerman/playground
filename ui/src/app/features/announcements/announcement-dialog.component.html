@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>
+  <mat-icon>{{ isEditMode ? 'edit' : 'add_alert' }}</mat-icon>
+  {{ isEditMode ? 'Edit Announcement' : 'New Announcement' }}
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="dialog-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" placeholder="Announcement title" />
+      @if (form.controls.title.hasError('required')) {
+        <mat-error>Title is required</mat-error>
+      }
+      @if (form.controls.title.hasError('maxlength')) {
+        <mat-error>Max 300 characters</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Content</mat-label>
+      <textarea
+        matInput
+        formControlName="content"
+        rows="4"
+        placeholder="Announcement body text..."
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        @for (t of types; track t.value) {
+          <mat-option [value]="t.value">
+            <mat-icon>{{ t.icon }}</mat-icon>
+            {{ t.label }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isActive" color="primary">Active (visible on site)</mat-checkbox>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" [disabled]="saving()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="form.invalid || saving()">
+    @if (saving()) {
+      <mat-progress-spinner diameter="18" mode="indeterminate" />
+    } @else {
+      {{ isEditMode ? 'Save Changes' : 'Publish' }}
+    }
+  </button>
+</mat-dialog-actions>
