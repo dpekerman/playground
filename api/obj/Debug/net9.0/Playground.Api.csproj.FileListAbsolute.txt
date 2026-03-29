@@ -164,3 +164,4 @@ D:\projects\playground\api\obj\Debug\net9.0\refint\Playground.Api.dll
 D:\projects\playground\api\obj\Debug\net9.0\Playground.Api.pdb
 D:\projects\playground\api\obj\Debug\net9.0\Playground.Api.genruntimeconfig.cache
 D:\projects\playground\api\obj\Debug\net9.0\ref\Playground.Api.dll
+D:\Projects\playground\api\obj\Debug\net9.0\Playground.Api.sourcelink.json
