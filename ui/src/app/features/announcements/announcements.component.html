@@ -1,0 +1,67 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">
+      <mat-icon>campaign</mat-icon>
+      Announcements
+    </h1>
+    <button mat-flat-button color="primary" (click)="openAnnouncementDialog()">
+      <mat-icon>add_alert</mat-icon>
+      New Announcement
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-overlay">
+      <mat-progress-spinner mode="indeterminate" diameter="56" />
+      <p class="loading-text">Loading announcements...</p>
+    </div>
+  }
+
+  @if (!loading() && error()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ error() }}</span>
+      <button mat-button (click)="refresh()">Retry</button>
+    </div>
+  }
+
+  @if (!loading() && !error()) {
+    @if (announcements().length === 0) {
+      <p class="empty-state">No announcements yet. Click "New Announcement" to publish one.</p>
+    }
+    <div class="announcements-list">
+      @for (ann of announcements(); track ann.id) {
+        <mat-card class="announcement-card ann-{{ ann.type }}">
+          <mat-card-content>
+            <div class="ann-header">
+              <mat-icon class="ann-icon">{{ getAnnouncementIcon(ann.type) }}</mat-icon>
+              <div class="ann-body">
+                <strong>{{ ann.title }}</strong>
+                <p>{{ ann.content }}</p>
+              </div>
+              <div class="ann-meta">
+                <span class="ann-date">{{ ann.publishedAt | date: 'mediumDate' }}</span>
+                @if (!ann.isActive) {
+                  <mat-chip class="chip-inactive">Inactive</mat-chip>
+                }
+              </div>
+              <div class="card-actions">
+                <button mat-icon-button [matTooltip]="'Edit'" (click)="openAnnouncementDialog(ann)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  [matTooltip]="'Delete'"
+                  (click)="confirmDeleteAnnouncement(ann)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

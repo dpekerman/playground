@@ -1,0 +1,140 @@
+.page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1976d2;
+  margin: 0;
+
+  mat-icon {
+    font-size: 2rem;
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+.loading-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  gap: 16px;
+
+  .loading-text {
+    color: #666;
+    font-size: 1rem;
+  }
+}
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff3e0;
+  border-left: 4px solid #ff9800;
+  padding: 16px 20px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  color: #e65100;
+
+  mat-icon {
+    color: #ff9800;
+  }
+}
+
+.empty-state {
+  color: #999;
+  font-style: italic;
+  margin: 0 0 16px;
+}
+
+.announcements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.announcement-card {
+  border-left: 4px solid #2196f3;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  &.ann-success {
+    border-left-color: #4caf50;
+  }
+  &.ann-warning {
+    border-left-color: #ff9800;
+  }
+  &.ann-info {
+    border-left-color: #2196f3;
+  }
+}
+
+.ann-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  .ann-icon {
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .ann-body {
+    flex: 1;
+    p {
+      margin: 4px 0 0;
+      color: #555;
+      line-height: 1.5;
+    }
+  }
+
+  .ann-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .ann-date {
+    font-size: 0.8rem;
+    color: #999;
+    white-space: nowrap;
+  }
+}
+
+.ann-success .ann-icon {
+  color: #4caf50;
+}
+.ann-warning .ann-icon {
+  color: #ff9800;
+}
+.ann-info .ann-icon {
+  color: #2196f3;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}

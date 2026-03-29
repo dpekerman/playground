@@ -1,0 +1,81 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">
+      <mat-icon>storefront</mat-icon>
+      Products
+    </h1>
+    <button mat-flat-button color="primary" (click)="openProductDialog()">
+      <mat-icon>add</mat-icon>
+      Add Product
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-overlay">
+      <mat-progress-spinner mode="indeterminate" diameter="56" />
+      <p class="loading-text">Loading products...</p>
+    </div>
+  }
+
+  @if (!loading() && error()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ error() }}</span>
+      <button mat-button (click)="refresh()">Retry</button>
+    </div>
+  }
+
+  @if (!loading() && !error()) {
+    @if (products().length === 0) {
+      <p class="empty-state">No products yet. Click "Add Product" to create the first one.</p>
+    }
+    <div class="products-grid">
+      @for (product of products(); track product.id) {
+        <mat-card class="product-card" [class.inactive]="!product.isActive">
+          @if (product.imageUrl) {
+            <img mat-card-image [src]="product.imageUrl" [alt]="product.name" />
+          }
+          <mat-card-header>
+            <mat-card-title>{{ product.name }}</mat-card-title>
+            <mat-card-subtitle>
+              <mat-chip [class]="'chip-' + product.category.toLowerCase().replace('/', '-')">
+                {{ product.category }}
+              </mat-chip>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="product-description">{{ product.description }}</p>
+            <div class="product-footer">
+              <span class="product-price">{{ product.price | currency }}</span>
+              @if (!product.isActive) {
+                <mat-chip class="chip-inactive">Discontinued</mat-chip>
+              }
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="primary">Learn More</button>
+            <button mat-flat-button color="primary" [disabled]="!product.isActive">
+              Get Started
+            </button>
+            <span class="action-spacer"></span>
+            <button
+              mat-icon-button
+              [matTooltip]="'Edit product'"
+              (click)="openProductDialog(product)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              [matTooltip]="'Delete product'"
+              (click)="confirmDeleteProduct(product)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  }
+</div>
