@@ -1,6 +1,6 @@
-<div class="page-container">
-  <div class="page-header">
-    <h1 class="page-title">
+<div class="max-w-7xl mx-auto px-6 py-8">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="flex items-center gap-2 text-3xl font-semibold text-blue-700 m-0">
       <mat-icon>groups</mat-icon>
       Team Members
     </h1>
@@ -11,14 +11,16 @@
   </div>
 
   @if (loading()) {
-    <div class="loading-overlay">
+    <div class="flex flex-col items-center justify-center py-20 gap-4">
       <mat-progress-spinner mode="indeterminate" diameter="56" />
-      <p class="loading-text">Loading team...</p>
+      <p class="text-gray-500 m-0">Loading team...</p>
     </div>
   }
 
   @if (!loading() && error()) {
-    <div class="error-banner">
+    <div
+      class="flex items-center gap-3 bg-orange-50 border-l-4 border-orange-400 px-4 py-3 rounded mb-6 text-orange-800"
+    >
       <mat-icon>error_outline</mat-icon>
       <span>{{ error() }}</span>
       <button mat-button (click)="refresh()">Retry</button>
@@ -27,27 +29,38 @@
 
   @if (!loading() && !error()) {
     @if (teamMembers().length === 0) {
-      <p class="empty-state">No team members yet. Click "Add Member" to add the first one.</p>
+      <p class="text-gray-400 italic my-4">
+        No team members yet. Click "Add Member" to add the first one.
+      </p>
     }
-    <div class="team-grid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
       @for (member of teamMembers(); track member.id) {
-        <mat-card class="team-card" [class.inactive]="!member.isActive">
-          <mat-card-content>
-            <div class="team-avatar">
+        <mat-card
+          class="transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+          [class.inactive]="!member.isActive"
+        >
+          <mat-card-content class="flex flex-col items-center pt-6 pb-2 text-center">
+            <div class="mb-3">
               @if (member.avatarUrl) {
-                <img [src]="member.avatarUrl" [alt]="member.name" class="avatar-img" />
+                <img
+                  [src]="member.avatarUrl"
+                  [alt]="member.name"
+                  class="w-20 h-20 rounded-full object-cover"
+                />
               } @else {
-                <mat-icon class="avatar-placeholder">account_circle</mat-icon>
+                <mat-icon class="avatar-placeholder-icon">account_circle</mat-icon>
               }
             </div>
-            <h3 class="member-name">{{ member.name }}</h3>
-            <p class="member-role">{{ member.role }}</p>
-            <mat-chip class="chip-department">{{ member.department }}</mat-chip>
-            <p class="member-email">
-              <mat-icon class="email-icon">email</mat-icon>
+            <h3 class="text-lg font-semibold m-0 mb-1 leading-tight">{{ member.name }}</h3>
+            <p class="text-gray-500 text-sm m-0 mb-2">{{ member.role }}</p>
+            <mat-chip class="mb-2">{{ member.department }}</mat-chip>
+            <p class="flex items-center gap-1 text-sm text-gray-500 m-0 mt-2">
+              <mat-icon class="text-base leading-none">email</mat-icon>
               {{ member.email }}
             </p>
-            <p class="member-joined">Joined {{ member.joinedAt | date: 'MMMM yyyy' }}</p>
+            <p class="text-xs text-gray-400 m-0 mt-1">
+              Joined {{ member.joinedAt | date: 'MMMM yyyy' }}
+            </p>
           </mat-card-content>
           <mat-card-actions align="end">
             <button

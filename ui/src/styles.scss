@@ -5,6 +5,25 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+// Tailwind CSS — preflight disabled in tailwind.config.js to avoid
+// conflicts with Angular Material's base styles.
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Global dialog form layout (used by all dialog components)
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 0.25rem;
+  width: 100%;
+
+  .form-row {
+    @apply grid grid-cols-2 gap-4;
+  }
+}
+
 html {
   height: 100%;
   @include mat.theme(

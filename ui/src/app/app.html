@@ -1,31 +1,31 @@
-<mat-toolbar color="primary" class="app-toolbar">
-  <mat-icon class="toolbar-logo">rocket_launch</mat-icon>
-  <span class="toolbar-title">Playground</span>
-  <span class="toolbar-spacer"></span>
-  <nav class="nav-links">
-    <a mat-button routerLink="/dashboard" routerLinkActive="active-link">
+<mat-toolbar color="primary" class="sticky top-0 z-50 shadow-md">
+  <mat-icon class="mr-2">rocket_launch</mat-icon>
+  <span class="text-xl font-bold tracking-wide mr-6">Playground</span>
+  <span class="flex-1"></span>
+  <nav class="flex gap-1">
+    <a mat-button routerLink="/dashboard" routerLinkActive="active-link" class="nav-link">
       <mat-icon>dashboard</mat-icon>
       Dashboard
     </a>
-    <a mat-button routerLink="/products" routerLinkActive="active-link">
+    <a mat-button routerLink="/products" routerLinkActive="active-link" class="nav-link">
       <mat-icon>storefront</mat-icon>
       Products
     </a>
-    <a mat-button routerLink="/team" routerLinkActive="active-link">
+    <a mat-button routerLink="/team" routerLinkActive="active-link" class="nav-link">
       <mat-icon>groups</mat-icon>
       Team
     </a>
-    <a mat-button routerLink="/announcements" routerLinkActive="active-link">
+    <a mat-button routerLink="/announcements" routerLinkActive="active-link" class="nav-link">
       <mat-icon>campaign</mat-icon>
       Announcements
     </a>
   </nav>
 </mat-toolbar>
 
-<main class="app-content">
+<main class="min-h-screen bg-gray-50">
   <router-outlet />
 </main>
 
-<footer class="app-footer">
-  <p>© 2026 Playground Platform — Angular + .NET 9 + SQL Server</p>
+<footer class="border-t border-gray-200 text-center py-3 text-xs text-gray-400">
+  <p class="m-0">© 2026 Playground Platform — Angular + .NET 9 + SQL Server</p>
 </footer>
